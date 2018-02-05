@@ -1,4 +1,5 @@
 $(document).ready(()=> {
+
     //fetch popular movies
     axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
     .then(response => {
@@ -10,10 +11,14 @@ $(document).ready(()=> {
                     <div class="text-center">
                     <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                     <h5 id="movieTitle">${movie.original_title}</h5>
-                    <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
+
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
+                <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                     </div>
                 </div>
+                       
+
             `;
         });
         //insert in html
@@ -22,9 +27,7 @@ $(document).ready(()=> {
     .catch(error =>{
         console.log(error);
     });
-
 });
-
 
 /**
  * home button control, this reloads the browser to retrieve popular movies
@@ -56,6 +59,7 @@ axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f3
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -92,6 +96,7 @@ axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -136,6 +141,7 @@ axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -169,6 +175,7 @@ axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f315
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -217,6 +224,7 @@ function searchmovie(){
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${film.poster_path}" alt="${film.original_title}"/>
                 <h5 id="movieTitle">${film.original_title}</h5>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${film.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
                 </div>
                 </div>
@@ -298,6 +306,7 @@ languages += ". ";
             </div>
         </div>
         <hr>    <center>
+        <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <a href="https://www.themoviedb.org/movie/${film.id}" target="_blank" class="btn btn-primary">View in theMovieDB</a>
                 </center>
 

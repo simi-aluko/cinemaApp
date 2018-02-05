@@ -1,5 +1,5 @@
 body{
-    background-color: black;
+    background:url('http://thecodeplayer.com/uploads/media/gs.png');
 }
 header{
     height:fit-content;
@@ -97,6 +97,7 @@ transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.5) all;
 }
 .movie{
     transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.5) all;   
+    margin: 10px 0;
 }
 #movieDetails{
     background:#808080;
@@ -133,3 +134,16 @@ img{
 .modal-body{
     padding:40px;
 }
+#signIn, #signUp{
+    cursor: pointer;
+}
+footer{
+    text-align: center;
+    background: black;
+    color: white;
+    margin-top: 40px;
+    padding: 30px 30px;
+    font-size: 1.2em;
+    font-weight: 100;
+}
+
