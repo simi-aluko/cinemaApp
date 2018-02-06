@@ -11,10 +11,8 @@ $(document).ready(()=> {
                     <div class="text-center">
                     <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                     <h5 id="movieTitle">${movie.original_title}</h5>
-
-                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
-                <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
-
+                        <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
+                        <button onclick="movieSelected('${movie.id}')" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
                     </div>
                 </div>
                        

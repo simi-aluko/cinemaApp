@@ -25,13 +25,9 @@
                 <div id="menu">
                     <div class="row account">
                         <button class="btn btn-default btn-block"  data-toggle="modal" href="#signInModal" id="signIn">Sign In</button>
-                        <button data-toggle="modal" href="#signUpModal" class="btn btn-default btn-block" id="signUp">Sign Up</button>
-                    
-
-            
-
-                        <!--sign in modal -->
-
+                        <button onclick = "window.location.href='Register/register.html'" class="btn btn-default btn-block" id="signUp">Sign Up</button>
+                    <!--                     
+                        <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a> -->
                       <div class="modal fade" role="dialog" id="signInModal">
                           <div class="modal-dialog">
                               <div class="modal-content" id="signInModal">
@@ -40,13 +36,15 @@
                                     <h3 class="modal-title" style="position:absolute;left:40%">Sign In here</h3>
                                  </div>
                                   <div class="modal-body">
-                                    <form method="post" action="php/api.php" name="login_form">
-                                      <div class="form-group" id="signIn">
-                                          <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                                          <input type="password" pattern=".{5,}" class="form-control" name="password" placeholder="Password(minlength = 5)" required>
-                                          <button type="submit" name="signin" class="btn btn-primary btn-block">Sign in</button> <a href="#">Forgot Password?</a>
+                                    <form method="post" action='' name="login_form">
+                                      <div class="form-group">
+                                          <p><input type="email" class="form-control span3" name="eid" id="email" placeholder="Email"></p>
+                                          <p><input type="password" class=" form-control span3" name="passwd" placeholder="Password"></p>
+                                          <button type="submit" class="btn btn-primary">Sign in</button>
+                                          <button href="#" style="float:right"class="btn btn-primary">Register</button><br><br>
+                                            <a href="#">Forgot Password?</a>
                                       </div>
-                                    
+                                      </p>
                                     </form>
                                   </div>
                                 </div>
@@ -54,40 +52,6 @@
                           </div>
                       </div>
                       
-                      <!-- sign up modal -->
-
-                      <div class="modal" role="dialog" id="signUpModal">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">x</button>                              
-                             <h3 id="registerheader">Register</h3>
-                            </div>
-
-                            <form method="post" action="php/api.php">
-                            
-                            <div class="modal-body">
-                                <div class="form-group" id="registerbody">
-                                    <input type="text" class="form-control" maxlength="30" name="fullname" placeholder="Full Name" required>
-                                    <input type="tel" class="form-control" maxlength="20" name="telNo" placeholder="Telephone Number" required>
-                                    <textarea type="text" class="form-control" maxlength="200" name="address" placeholder="Address" required ></textarea>
-                                    <input type="email" class="form-control" maxlength="40" name="email" placeholder="Email" required>
-                                    <input type="password" class="form-control" pattern=".{5,}" maxlength="30" name="password" placeholder="Password(min-length = 5)" required>
-                                    <input type="password" class="form-control" pattern=".{5,}" maxlength="30" name="cpassword" placeholder="Confirm Password(min-length = 5)" required>
-                                    <input type="number" class="form-control" pattern=".{3,}" maxlength="3" name="cvv" placeholder="CVV(min-length = 3)" required>
-                                    <input type="number" class="form-control" pattern=".{20,}" maxlength="20" name="cardNumber" placeholder="Card Number(min-length = 20)" required>                                    
-                                    <input type="number" class="form-control" pattern=".{4,}" maxlength="4" name="pin" placeholder="Pin(min-length = 4)" required>                                    
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="submit" name="signup" class="btn btn-lg btn-block btn-success">Register</button>
-                            </div>
-                          </form>
-                            
-                          </div>
-                        </div>
-                      </div>
                         
                     
                       </div>

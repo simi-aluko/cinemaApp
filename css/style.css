@@ -102,15 +102,15 @@ transition: 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.5) all;
 #movieDetails{
     background:#808080;
     border-radius: 0px;
-    margin:10px;
     color:black;
     font-weight: 100;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
+    margin:10px 0;
 }
 #movieDetails:hover{
     border-radius: 0px;
-    margin:10px;
     border-color: black;
 }
 #searchText{
@@ -147,3 +147,22 @@ footer{
     font-weight: 100;
 }
 
+#registerheader{
+    margin: 0 auto;
+}
+#registerbody .form-control{
+    margin:15px;
+}
+#signIn input{
+    margin:15px 0;
+}
+#bookMovie{
+    border-radius: 0;
+    background: black;
+    border-color: transparent;
+    width: 100%;
+    cursor: pointer;
+}
+#bookMovie:hover{
+    border-color: white;
+}
