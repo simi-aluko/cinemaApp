@@ -1,3 +1,14 @@
+<?php
+  ob_start();
+  session_start();
+  
+  if(!isset($_SESSION['cinemaUser']))
+  {
+    header("Location:index.php");
+  }
+  echo $_SESSION['cinemaUser'];
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,11 +21,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
   <body>
       <header>
             <div id="title">
-                    <span>Tdb Cinemas <i class="fa fa-television" style="font-size:50px;color:white;"></i>...</span>
+                    <span>Tdb Cinemas Home<i class="fa fa-television" style="font-size:50px;color:white;"></i>...</span>
                 </div>
       </header>
 
@@ -24,35 +36,9 @@
             <div class="col-md-3">
                 <div id="menu">
                     <div class="row account">
-                        <button class="btn btn-default btn-block"  data-toggle="modal" href="#signInModal" id="signIn">Sign In</button>
-                        <button onclick = "window.location.href='Register/register.html'" class="btn btn-default btn-block" id="signUp">Sign Up</button>
-                    <!--                     
-                        <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a> -->
-                      <div class="modal fade" role="dialog" id="signInModal">
-                          <div class="modal-dialog">
-                              <div class="modal-content" id="signInModal">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">x</button>
-                                    <h3 class="modal-title" style="position:absolute;left:40%">Sign In here</h3>
-                                 </div>
-                                  <div class="modal-body">
-                                    <form method="post" action='' name="login_form">
-                                      <div class="form-group">
-                                          <p><input type="email" class="form-control span3" name="eid" id="email" placeholder="Email"></p>
-                                          <p><input type="password" class=" form-control span3" name="passwd" placeholder="Password"></p>
-                                          <button type="submit" class="btn btn-primary">Sign in</button>
-                                          <button href="#" style="float:right"class="btn btn-primary">Register</button><br><br>
-                                            <a href="#">Forgot Password?</a>
-                                      </div>
-                                      </p>
-                                    </form>
-                                  </div>
-                                </div>
-    
-                          </div>
-                      </div>
-                      
-                        
+
+                      <button class="btn btn-default btn-block" name="logout" data-toggle="modal" id="signIn">Log out</button>
+                 
                     
                       </div>
                     <div id="movieItems">
@@ -65,25 +51,6 @@
                          <div class="row movieOptions" id="toprated">
                              <p class="item">Top Rated</p>
                           </div>
-
-                          <!-- for signed In users-->
-                          <!-- <div class="row movieOptions" id="getreviews">
-                             <p class="item">Get Reviews</p>
-                          </div>
-                          <div class="row movieOptions" id="ratemovie">
-                             <p class="item">Rate Movie</p>
-                          </div> -->
-                          <!-- <div class="row movieOptions" id="getrecommendations">
-                              <p class="item">Get Recommendations</p>
-                           </div> -->
-                           <!-- <div class="row movieOptions" id="releasenotes">
-                              <p class="item">Get Release Dates</p>
-                           </div> -->
-
-                           <!-- Latest movies not working for now!!! you can uncomment to check if its working !! -->
-                           <!-- <div class="row movieOptions" id="latest">
-                              <p class="item">Latest Movies</p>
-                           </div> -->
                            <div class="row movieOptions" id="nowplaying">
                               <p class="item">Now Playing</p>
                            </div>
@@ -102,10 +69,11 @@
                     <div class="row"  id="movies">
   
                     </div>
-                     <!-- Modal -->
+
+
+                     <!--Movie Details Modal -->
                 <div id="myModal" class="modal fade" role="dialog">
                   <div class="modal-dialog modal-lg">
-                
                     <!-- Modal content-->
                     <div class="modal-content">
                       <div class="modal-header">
@@ -121,7 +89,6 @@
                 
                   </div>
                 </div>
-                
             </div>
                   </div>
             
@@ -135,6 +102,62 @@
           <p>Copyright 2018, Tdb Cinemas.</p>
         </div>
       </footer>
+
+      <!-- Book Movie Modal -->
+      <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h3 class="modal-title" id="bookMovieModal">Book Movie Here</h3>
+            </div>
+          <form action="">
+            <div class="modal-body">
+                <div class="container">
+                  <!--select cinema Location-->
+                  <div class="row">
+                    <label for="sel1">Select Cinema Location:</label>
+                    <select class="form-control input-lg" id="sel1">
+                      <option>Ikeja</option>
+                      <option>VI</option>                  
+                    </select>
+                  </div>
+                  <!-- end cinema location-->
+
+                  <!-- choose day -->
+                  <div class="row" id="chooseDay">
+                    <label for="sel2">Choose Day:</label>
+                    <select class="form-control input-lg" id="sel2">
+                      <option>Sunday: <?php echo date('F jS, Y', strtotime('sunday')); ?> </option>
+                      <option>Monday: <?php echo date('F jS, Y', strtotime('monday')); ?> </option>                  
+                      <option>Tuesday: <?php echo date('F jS, Y', strtotime('tuesday')); ?></option>                  
+                      <option>Wednesday: <?php echo date('F jS, Y', strtotime('wednesday')); ?></option>                  
+                      <option>Thursday: <?php echo date('F jS, Y', strtotime('thursday')); ?></option>                  
+                      <option>Friday: <?php  echo date('F jS, Y', strtotime('friday')); ?></option>                  
+                      <option>Saturday: <?php echo date('F jS, Y', strtotime('saturday')); ?></option>             
+                    </select>
+                  </div>
+                  <!-- end choosing of day-->
+
+                  <!-- Show film and price -->
+                <div class="row" id="pictureAndPrice">
+                    <div id="picture"></div>
+                    <div id="price"></div>
+                </div>
+                  <!-- end show film and price -->
+                    
+                </div>
+              </div>
+          </form>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="cancelBooking" data-dismiss="modal">Cancel Booking</button>
+            </div>
+          </div>
+        </div>
+      </div>
      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -146,6 +169,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- our own javascript file -->
-    <script src="js/main.js"></script>
+    <script src="js/home.js"></script>
+
   </body>
 </html>

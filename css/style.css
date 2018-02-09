@@ -162,7 +162,26 @@ footer{
     border-color: transparent;
     width: 100%;
     cursor: pointer;
+    border-radius: 6px;
 }
 #bookMovie:hover{
     border-color: white;
+}
+#preview{
+    margin: 10px 0;
+}
+h3#bookMovieModal.modal-title{
+    margin:0 auto;
+    font-weight: 100;
+    font-size: 2.2em;
+}
+#cancelBooking{
+    font-weight: 100;
+}
+.btn-group{
+    margin: 20px;
+}
+.row#chooseDay{
+    margin-top:20px;
+    margin-top:20px;
 }

@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,12 +30,9 @@
                     <div class="row account">
                         <button class="btn btn-default btn-block"  data-toggle="modal" href="#signInModal" id="signIn">Sign In</button>
                         <button data-toggle="modal" href="#signUpModal" class="btn btn-default btn-block" id="signUp">Sign Up</button>
-                    
-
-            
-
+                        
+                        
                         <!--sign in modal -->
-
                       <div class="modal fade" role="dialog" id="signInModal">
                           <div class="modal-dialog">
                               <div class="modal-content" id="signInModal">
@@ -40,10 +41,10 @@
                                     <h3 class="modal-title" style="position:absolute;left:40%">Sign In here</h3>
                                  </div>
                                   <div class="modal-body">
-                                    <form method="post" action="php/api.php" name="login_form">
+                                    <form method="post" action="index.php" name="login_form">
                                       <div class="form-group" id="signIn">
                                           <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                                          <input type="password" pattern=".{5,}" class="form-control" name="password" placeholder="Password(minlength = 5)" required>
+                                          <input type="password" pattern=".{5,20}" class="form-control" name="password" title="minimum length is 5 and maximum length is 20" placeholder="Password" required>
                                           <button type="submit" name="signin" class="btn btn-primary btn-block">Sign in</button> <a href="#">Forgot Password?</a>
                                       </div>
                                     
@@ -52,7 +53,8 @@
                                 </div>
     
                           </div>
-                      </div>
+                      </div>                 
+
                       
                       <!-- sign up modal -->
 
@@ -65,19 +67,19 @@
                              <h3 id="registerheader">Register</h3>
                             </div>
 
-                            <form method="post" action="php/api.php">
+                            <form method="post" action="index.php">
                             
                             <div class="modal-body">
                                 <div class="form-group" id="registerbody">
-                                    <input type="text" class="form-control" maxlength="30" name="fullname" placeholder="Full Name" required>
-                                    <input type="tel" class="form-control" maxlength="20" name="telNo" placeholder="Telephone Number" required>
-                                    <textarea type="text" class="form-control" maxlength="200" name="address" placeholder="Address" required ></textarea>
-                                    <input type="email" class="form-control" maxlength="40" name="email" placeholder="Email" required>
-                                    <input type="password" class="form-control" pattern=".{5,}" maxlength="30" name="password" placeholder="Password(min-length = 5)" required>
-                                    <input type="password" class="form-control" pattern=".{5,}" maxlength="30" name="cpassword" placeholder="Confirm Password(min-length = 5)" required>
-                                    <input type="number" class="form-control" pattern=".{3,}" maxlength="3" name="cvv" placeholder="CVV(min-length = 3)" required>
-                                    <input type="number" class="form-control" pattern=".{20,}" maxlength="20" name="cardNumber" placeholder="Card Number(min-length = 20)" required>                                    
-                                    <input type="number" class="form-control" pattern=".{4,}" maxlength="4" name="pin" placeholder="Pin(min-length = 4)" required>                                    
+                                    <input type="text" class="form-control" name="fullname" placeholder="Full Name" required>
+                                    <input type="tel" class="form-control" name="telNo" placeholder="Telephone Number" required>
+                                    <textarea type="text" class="form-control" pattern = ".{0,250}" title = "minimum length is 0 and maximum length is 250" maxlength="200" name="address" placeholder="Address" required></textarea>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                    <input type="password" class="form-control" pattern=".{5,20}" name="password" title="minimum length is 5 and maximum is 20" placeholder="Password" required>
+                                    <input type="password" class="form-control" pattern=".{5,20}" maxlength="30" name="cpassword" title="minimum length is 5 and maximum is 20" placeholder="Confirm Password" required>
+                                    <input class="form-control" pattern=".{3,3}" required name="cvv" title="must be 3 numbers long" placeholder="CVV" >
+                                    <input class="form-control" pattern=".{16,16}" required name="cardNumber" title="must be 16 numbers long" placeholder="Card Number" >                                    
+                                    <input class="form-control" pattern=".{4,15}"required name="pin" title="minimum length is 4 numbesr while maximum is 15" placeholder="Pin" >                                    
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -88,7 +90,6 @@
                           </div>
                         </div>
                       </div>
-                        
                     
                       </div>
                     <div id="movieItems">
@@ -138,7 +139,7 @@
                     <div class="row"  id="movies">
   
                     </div>
-                     <!-- Modal -->
+                     <!--Movie Details Modal -->
                 <div id="myModal" class="modal fade" role="dialog">
                   <div class="modal-dialog modal-lg">
                 
@@ -171,10 +172,75 @@
           <p>Copyright 2018, Tdb Cinemas.</p>
         </div>
       </footer>
+
+      <!--- started writing php here -->
+      <!-- sign up control php script -->
+      <?php
+                       require 'php/connect.php';
+
+                      if(isset($_POST['signup'])){
+
+                        $fullname = htmlspecialchars($_POST['fullname']);
+                        $telNo = htmlspecialchars($_POST['telNo']);
+                        $address = htmlspecialchars($_POST['address']);
+                        $email = htmlspecialchars($_POST['email']);
+                        $password = htmlspecialchars($_POST['password']);
+                        $cpassword = htmlspecialchars($_POST['cpassword']);
+                        $cvv = htmlspecialchars($_POST['cvv']);
+                        $cardNo = htmlspecialchars($_POST['cardNumber']);
+                        $pin = htmlspecialchars($_POST['pin']);
+                    
+                        $cvvtype = gettype($cvv);
+                        $cardNo = gettype($cardNo);
+                        if($password !== $cpassword){
+                            echo '<script type="text/javascript">alert("Your Passwords don\'t match")</script>';
+                        }else{
+                            $sqlCheckIfUserExist = "SELECT `phone`,`email` FROM users WHERE `phone`='$telNo' OR `email`='$email' ";
+                        
+                            $usercount = mysqli_num_rows($conn->query($sqlCheckIfUserExist));
+                            
+                            if($usercount >= 1){
+                              echo '<script type="text/javascript">alert("This user already exists")</script>';
+                            }else{
+                              $sqlRegisterUser = "INSERT INTO users (`fullname`,`phone`,`address`,`email`,`password`,`cardNo`,`cvv`,`pin`) VALUES ('$fullname','$telNo','$address','$email','$password','$cardNo','$cvv','$pin')";
+
+                              $resultOfRegistration = $conn->query($sqlRegisterUser);
+
+                              if($resultOfRegistration === TRUE){
+                                echo '<script type="text/javascript">alert("You have successfully been registered. You now have an account!")</script>';
+                            }
+                            }
+                        
+                            
+                        }
+                    
+                    
+                    }
+                      ?>
+
+                      <!-- signIn control script -->
+                      <?php 
+                      require 'php/connect.php';
+                        if(isset($_POST['signin'])){
+                          $email = htmlspecialchars($_POST['email']);
+                          $password = htmlspecialchars($_POST['password']);
+                      
+                          $sql = "SELECT `email`,`password` FROM users WHERE `email` = '$email' AND `password` = '$password'";
+                          $result = mysqli_num_rows($conn->query($sql));
+
+                          if($result > 0){
+                            $_SESSION['cinemaUser'] = $email;
+                              header('Location:home.php');
+                          }else{
+                              echo '<script type="text/javascript">alert("Check your Login details, login unsuccessful.")</script>';        
+                          }
+                      }
+                      ?>
      
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    
     <script src="vendors/bootstrap/js/popper.min.js"></script>
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
 
