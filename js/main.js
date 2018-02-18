@@ -1,7 +1,8 @@
+var page = 1;
 $(document).ready(()=> {
 
     //fetch popular movies
-    axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+    axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
     .then(response => {
         let movies = response.data.results;
         let output = "";
@@ -41,13 +42,13 @@ $('#Home').click(() => {
  Upcoming movies fetcher on click
  */
 
-$('#upcoming').click(() =>{
+$('#popular').click(() =>{
 
 $('#movies').html("");
 
-$('.popMovies').text("Upcoming Movies");
+$('.popMovies').text("Popular Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -84,7 +85,7 @@ $('#movies').html("");
 
 $('.popMovies').text("Top Rated Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -135,7 +136,7 @@ $('#movies').html("");
 
 $('.popMovies').text("Now Playing");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -169,7 +170,7 @@ $('#latest').click(() =>{
 
 $('.popMovies').text("Latest Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -328,4 +329,9 @@ languages += ". ";
 $(".closemodal").click(() => {
     $(".modal-body").html("");
     $("modal-title").text("");
+});
+
+$('#moreMovies').click(()=>{
+    page++;
+    location.reload();
 });

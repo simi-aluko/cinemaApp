@@ -1,7 +1,8 @@
+var page = 1;
 $(document).ready(()=> {
 
     //fetch popular movies
-    axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+    axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+ page)
     .then(response => {
         let movies = response.data.results;
         let output = "";
@@ -11,7 +12,7 @@ $(document).ready(()=> {
                     <div class="text-center">
                     <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                     <h5 id="movieTitle">${movie.original_title}</h5>
-                        <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId"  id="bookMovie">Book</button>
+                        <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId"  id="bookMovie">Book</button>
                         <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
                     </div>
                 </div>
@@ -28,7 +29,7 @@ $(document).ready(()=> {
 });
 
 /**
- * home button control, this reloads the browser to retrieve popular movies
+ * home button control, this reloads the browser to retrieve movies showing in cinema
  */
 $('#Home').click(() => {
     location.reload();
@@ -41,13 +42,13 @@ $('#Home').click(() => {
  Upcoming movies fetcher on click
  */
 
-$('#upcoming').click(() =>{
+$('#popular').click(() =>{
 
 $('#movies').html("");
 
-$('.popMovies').text("Upcoming Movies");
+$('.popMovies').text("Popular Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -57,7 +58,7 @@ axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f3
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
-                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId"  id="bookMovie">Book</button>
+                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId"  id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal" class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -84,7 +85,7 @@ $('#movies').html("");
 
 $('.popMovies').text("Top Rated Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -94,7 +95,7 @@ axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
-                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button> 
+                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button> 
                 <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -129,7 +130,7 @@ $('#movies').html("");
 
 $('.popMovies').text("Now Playing");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -139,7 +140,7 @@ axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
-                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
+                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -163,7 +164,7 @@ $('#latest').click(() =>{
 
 $('.popMovies').text("Latest Movies");
 //fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page=1")
+axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
 .then(response => {
     let movies = response.data.results;
     let output = "";
@@ -173,7 +174,7 @@ axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f315
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
-                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
+                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -222,7 +223,7 @@ function searchmovie(){
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${film.poster_path}" alt="${film.original_title}"/>
                 <h5 id="movieTitle">${film.original_title}</h5>
-                <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${film.poster_path}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
+                <button class="btn btn-primary" onclick="moviePrice('${film.vote_average}','https://image.tmdb.org/t/p/w300/${film.poster_path}','${film.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${film.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
                 </div>
                 </div>
@@ -311,7 +312,7 @@ function movieSelected(movieId){
 
 
         // $(".modal-title").text(`${film.original_title}`);
-        $('.modal-body').html(output);
+        $('#movieDetailsModal').html(output);
     })
     .catch(error=>{
         console.log(error);
@@ -319,15 +320,15 @@ function movieSelected(movieId){
 }
 
 $(".closemodal").click(() => {
-    $(".modal-body").html("");
-    $("modal-title").text("");
+    $("#movieDetailsModal").html("");
 });
 
 $('#signIn').click(()=>{
+    alert("You have just logged out.")
     window.location = "../cinemaApp/php/logout.php";
 });
 
-function moviePrice(rating,poster_path){
+function moviePrice(rating,poster_path,movieTitle){
     var price;
     if(rating < 5){
         price = "Two Thousand Naira(N2,000)";
@@ -340,7 +341,50 @@ function moviePrice(rating,poster_path){
     var picture = `
     <img src="${poster_path}" />
     `;
-
-    $('#price').text(price);
+    var bookingInfo = `
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Movie: </strong>${movieTitle}</li>
+            <li class="list-group-item" id=""><strong>Price: </strong>${price}</li>
+            <li class="list-group-item">
+                <label><strong>Number of Tickets</strong></label>
+                <select class="form-control" id="ticketNumber">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>                    
+                </select>
+            </li>
+        </ul><br>
+        <a id="purchaseMovie" onclick="purchaseMovie('${movieTitle}','${price}')" class="btn btn-lg btn-success btn-block">Book Movie</a>
+    `;
+    $('#price').html(bookingInfo);
     $('#picture').html(picture);
+}
+
+function purchaseMovie(movieTitle,price){
+
+    let ticketNumber = $('#ticketNumber').val();
+    let seeingDay = $('#viewingDay').val();
+    let timeOfDay = $('#timeOfDay').val();
+    var TotalAmt = "";
+
+    if(price == "Two Thousand Naira(N2,000)"){
+        TotalAmt = (2000 * ticketNumber);
+    }else if(price == "Two Thousand and Five Hundred Naira(N2,500)"){
+        TotalAmt = (2500 * ticketNumber);
+    }else if(price == "Three thousand Naira(N3,000)"){
+        TotalAmt = (3000 * ticketNumber);
+    }
+
+    $.ajax({
+        url:'../cinemaApp/php/api.php',
+        data: {movieTitle:movieTitle,price:TotalAmt,purchaseMovie:"Book this Movie",
+        ticketnumber:ticketNumber,seeingDay:seeingDay,timeOfDay:timeOfDay},
+        type: 'post',
+        success: (data)=>{
+            alert(data);
+            location.reload();
+        }
+    });
 }

@@ -45,7 +45,7 @@ session_start();
                                       <div class="form-group" id="signIn">
                                           <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                                           <input type="password" pattern=".{5,20}" class="form-control" name="password" title="minimum length is 5 and maximum length is 20" placeholder="Password" required>
-                                          <button type="submit" name="signin" class="btn btn-primary btn-block">Sign in</button> <a href="#">Forgot Password?</a>
+                                          <button type="submit" name="signin" class="btn btn-primary btn-block">Sign in</button>
                                       </div>
                                     
                                     </form>
@@ -96,31 +96,12 @@ session_start();
                         <div class="row movieOptions" id="Home">
                             <p class="item">Home</p>
                          </div>
-                        <div class="row movieOptions" id="upcoming">
-                            <p class="item">Upcoming</p>
+                        <div class="row movieOptions" id="popular">
+                            <p class="item">Popular</p>
                          </div>
                          <div class="row movieOptions" id="toprated">
                              <p class="item">Top Rated</p>
                           </div>
-
-                          <!-- for signed In users-->
-                          <!-- <div class="row movieOptions" id="getreviews">
-                             <p class="item">Get Reviews</p>
-                          </div>
-                          <div class="row movieOptions" id="ratemovie">
-                             <p class="item">Rate Movie</p>
-                          </div> -->
-                          <!-- <div class="row movieOptions" id="getrecommendations">
-                              <p class="item">Get Recommendations</p>
-                           </div> -->
-                           <!-- <div class="row movieOptions" id="releasenotes">
-                              <p class="item">Get Release Dates</p>
-                           </div> -->
-
-                           <!-- Latest movies not working for now!!! you can uncomment to check if its working !! -->
-                           <!-- <div class="row movieOptions" id="latest">
-                              <p class="item">Latest Movies</p>
-                           </div> -->
                            <div class="row movieOptions" id="nowplaying">
                               <p class="item">Now Playing</p>
                            </div>
@@ -139,6 +120,8 @@ session_start();
                     <div class="row"  id="movies">
   
                     </div>
+                    <center><button class="btn btn-primary btn-lg" id="moreMovies">More Movies</button></center>
+                    
                      <!--Movie Details Modal -->
                 <div id="myModal" class="modal fade" role="dialog">
                   <div class="modal-dialog modal-lg">

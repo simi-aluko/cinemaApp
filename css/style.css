@@ -64,7 +64,7 @@ button.btn{
     color:#3ad277;
 }
 #movies{
-    height:calc(100vh - 67px);
+    height:1500px;
     overflow:scroll;
 }
 .popMovies{
@@ -141,12 +141,14 @@ footer{
     text-align: center;
     background: black;
     color: white;
-    margin-top: 40px;
+    margin-top: 0px;
     padding: 30px 30px;
     font-size: 1.2em;
     font-weight: 100;
 }
-
+#purchaseInfo{
+    margin-top:50px;
+}
 #registerheader{
     margin: 0 auto;
 }
@@ -184,4 +186,31 @@ h3#bookMovieModal.modal-title{
 .row#chooseDay{
     margin-top:20px;
     margin-top:20px;
+}
+p#userSession{
+    color: white;
+    font-size: 1.5em;
+}
+p#userSession:hover{
+    text-decoration: underline;
+}
+div#pictureAndPrice div{
+    margin-top: 20px;
+}
+div#picture.col-lg-4{
+    text-align: center;
+}
+#bookedMoviesDetailsTable{
+margin-top: 80px;
+color:white;
+font-size: 1.2em;
+}
+#bookedMoviesTitle{
+    color: wheat;
+    font-size: 1.5em;
+    text-align: center;
+    text-decoration: underline;
+}
+#purchaseMovie{
+    color:white;
 }
