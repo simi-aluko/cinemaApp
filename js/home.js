@@ -27,7 +27,7 @@ $(document).ready(()=> {
 });
 
 /**
- * home button control, this reloads the browser to retrieve movies showing in cinema
+ * home button control
  */
 $('#Home').click(() => {
     $('#movies').html("");

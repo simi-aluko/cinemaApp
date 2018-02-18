@@ -28,8 +28,8 @@ session_start();
             <div class="col-md-3">
                 <div id="menu">
                     <div class="row account">
-                        <button class="btn btn-default btn-block"  data-toggle="modal" href="#signInModal" id="signIn">Sign In</button>
-                        <button data-toggle="modal" href="#signUpModal" class="btn btn-default btn-block" id="signUp">Sign Up</button>
+                        <button class="btn btn-default btn-block" data-backdrop="static" data-keyboard="false" data-toggle="modal" href="#signInModal" id="signIn">Sign In</button>
+                        <button data-toggle="modal" href="#signUpModal" data-backdrop="static" data-keyboard="false" class="btn btn-default btn-block" id="signUp">Sign Up</button>
                         
                         
                         <!--sign in modal -->
@@ -120,6 +120,7 @@ session_start();
                     <div class="row"  id="movies">
   
                     </div>
+                    <hr>
                     <center><button class="btn btn-primary btn-lg" id="moreMovies">More Movies</button></center>
                     
                      <!--Movie Details Modal -->
@@ -132,7 +133,7 @@ session_start();
                         <button type="button" class="close closemodal" data-dismiss="modal">&times;</button>
                         <!-- <h4 class="modal-title">Modal Header</h4> -->
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body" id="movieDetailsModal">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default closemodal" data-dismiss="modal">Close</button>
@@ -150,7 +151,7 @@ session_start();
         </div>
               
       </main>
-      <footer>
+      <footer style="margin-top:60px;">
         <div>
           <p>Copyright 2018, Tdb Cinemas.</p>
         </div>

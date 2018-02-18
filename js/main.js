@@ -1,6 +1,6 @@
 var page = 1;
 $(document).ready(()=> {
-
+    $('#moreMovies').show();
     //fetch popular movies
     axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
     .then(response => {
@@ -29,11 +29,39 @@ $(document).ready(()=> {
 });
 
 /**
- * home button control, this reloads the browser to retrieve popular movies
+ * home button control
  */
 $('#Home').click(() => {
-    location.reload();
+    $('#movies').html("");
+    $('#moreMovies').show();
+
+    $('.popMovies').text("Showing In Cinemas");
+    
+    axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
+    .then(response => {
+        let movies = response.data.results;
+        let output = "";
+        $.each(movies, (index,movie)=>{
+           output += `
+                <div class="col-md-3 movie">
+                    <div class="text-center">
+                    <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
+                    <h5 id="movieTitle">${movie.original_title}</h5>
+                    <button class="btn btn-primary" onclick="moviePrice('${movie.vote_average}','https://image.tmdb.org/t/p/w300/${movie.poster_path}','${movie.original_title}')" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#modelId" id="bookMovie">Book</button>
+                    <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
+    
+                    </div>
+                </div>
+            `;
+        });
+        //insert in html
+        $("#movies").html(output);
+    })
+    .catch(error =>{
+        console.log(error);
+    });
 });
+
 
 
 
@@ -45,6 +73,7 @@ $('#Home').click(() => {
 $('#popular').click(() =>{
 
 $('#movies').html("");
+$('#moreMovies').show();
 
 $('.popMovies').text("Popular Movies");
 //fetch popular movies
@@ -82,6 +111,7 @@ axios.get("https://api.themoviedb.org/3/movie/popular?api_key=f13549c92bee7e0f31
 $('#toprated').click(() =>{
     
 $('#movies').html("");
+$('#moreMovies').show();
 
 $('.popMovies').text("Top Rated Movies");
 //fetch popular movies
@@ -95,13 +125,7 @@ axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f
                 <div class="text-center">
                 <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
                 <h5 id="movieTitle">${movie.original_title}</h5>
-                <?php 
-                    if(isset($_SESSION['cinemaUser'])){
-                       echo '<button class="btn btn-primary" id="bookMovie">Book</button>';
-                    }else{
-                       echo '<button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>'; 
-                    }
-                ?>
+                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
                 <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
 
                 </div>
@@ -116,23 +140,10 @@ axios.get("https://api.themoviedb.org/3/movie/top_rated?api_key=f13549c92bee7e0f
 });
 });
 
-
-/**
- * for signed In users
- */
-
-// $('#getreviews').click(() =>{
-    
-// });
-// $('#ratemovie').click(() =>{
-    
-// });
-// $('#getrecommendations').click(() =>{
-    
-// });
 $('#nowplaying').click(() =>{
        
 $('#movies').html("");
+$('#moreMovies').show();
 
 $('.popMovies').text("Now Playing");
 //fetch popular movies
@@ -161,46 +172,14 @@ axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f13549c92bee7e
 });
 
 
-
-/**
- * latest movies fetcher
- */
-$('#latest').click(() =>{
-    $('#movies').html("");
-
-$('.popMovies').text("Latest Movies");
-//fetch popular movies
-axios.get("https://api.themoviedb.org/3/movie/latest?api_key=f13549c92bee7e0f31569758e7396edb&language=en-US&page="+page)
-.then(response => {
-    let movies = response.data.results;
-    let output = "";
-    $.each(movies, (index,movie)=>{
-       output += `
-            <div class="col-md-3 movie">
-                <div class="text-center">
-                <img src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" alt="${movie.original_title}"/>
-                <h5 id="movieTitle">${movie.original_title}</h5>
-                <button class="btn btn-primary" onclick= "alert('Please Sign In to Book Movie!')" id="bookMovie">Book</button>
-                <button onclick="movieSelected('${movie.id}')" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal"  class="btn btn-primary" id="movieDetails" href="#">Movie Details</button>
-
-                </div>
-            </div>
-        `;
-    });
-    //insert in html
-    $("#movies").html(output);
-})
-.catch(error =>{
-    console.log(error);
-});
-});
-
 /**
  * search control
  */
 });
 $('#search').click(() =>{
     $('#movies').html("");
+    $('#moreMovies').hide();
+    
     $(".popMovies").text("Search For any Movie");
     let output=`
         <div id="searchForm">
@@ -319,7 +298,7 @@ languages += ". ";
 
 
         // $(".modal-title").text(`${film.original_title}`);
-        $('.modal-body').html(output);
+        $('#movieDetailsModal').html(output);
     })
     .catch(error=>{
         console.log(error);
@@ -327,11 +306,26 @@ languages += ". ";
 }
 
 $(".closemodal").click(() => {
-    $(".modal-body").html("");
-    $("modal-title").text("");
+    $("#movieDetailsModal").html("");
 });
+
 
 $('#moreMovies').click(()=>{
     page++;
-    location.reload();
+
+    if($('.popMovies').text() == "Showing In Cinemas"){
+        $('#Home').click();
+    }
+
+    if($('.popMovies').text() == "Popular Movies"){
+        $('#popular').click();
+    }
+
+    if($('.popMovies').text() == "Top Rated Movies"){
+        $('#nowplaying').click();
+    }
+
+    if($('.popMovies').text() == "Now Playing"){
+        $('#toprated').click();
+    }
 });
