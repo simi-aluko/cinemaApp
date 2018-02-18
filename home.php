@@ -43,19 +43,19 @@
                       </div>
                     <div id="movieItems">
                         <div class="row movieOptions" id="Home">
-                            <p class="item">Home</p>
+                            <p class="item" id="showingInCinemas">Home</p>
                          </div>
                         <div class="row movieOptions" id="popular">
-                            <p class="item">Popular</p>
+                            <p class="item" id="popular">Popular</p>
                          </div>
                          <div class="row movieOptions" id="toprated">
-                             <p class="item">Top Rated</p>
+                             <p class="item" id="topRated">Top Rated</p>
                           </div>
                            <div class="row movieOptions" id="nowplaying">
-                              <p class="item">Now Playing</p>
+                              <p class="item" id="nowPlaying">Now Playing</p>
                            </div>
                            <div class="row movieOptions" style="border-top:1px solid black;" id="search">
-                              <p class="item">Search <i class="fa fa-search" style="font-size:25px;color:white;"></i></p>
+                              <p class="item" id="search">Search <i class="fa fa-search" style="font-size:25px;color:white;"></i></p>
                            </div>
                     </div>
                     
@@ -64,7 +64,7 @@
             <div class="col-md-9">
                 <div class="container">
            <div class="row">
-                      <p class="popMovies">Showing In Cinemas</p>
+                      <p class="popMovies" id="sectionTitle">Showing In Cinemas</p>
                       </div>         
                     <div class="row"  id="movies">
 
@@ -119,6 +119,7 @@
                     <th scope="col">NUMBER OF TICKETS</th>
                     <th scope="col">SEEING DATE</th>
                     <th scope="col">SEEING TIME</th>
+                    <th scope="col">Tdb CINEMA</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -136,6 +137,7 @@
                     <td><?=$row[5] ?></td>
                     <td><?=$row[6] ?></td>
                     <td><?=$row[7] ?></td>
+                    <td><?=$row[8] ?></td>
                   </tr>
                   <?php endwhile; ?>
                 </tbody>
@@ -179,8 +181,8 @@
                 <div class="container">
                   <!--select cinema Location-->
                   <div class="row">
-                    <label for="sel1">Select Cinema Location:</label>
-                    <select class="form-control input-lg" id="sel1">
+                    <label>Select Cinema Location:</label>
+                    <select class="form-control input-lg" id="cinemaLocation">
                       <option>Ikeja</option>
                       <option>VI</option>                  
                     </select>

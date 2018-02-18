@@ -12,11 +12,12 @@ if(isset($_POST['purchaseMovie'])){
     $ticketNumber = $_POST['ticketnumber'];
     $seeingDay = $_POST['seeingDay'];
     $timeOfDay = $_POST['timeOfDay'];
+    $cinemaLocation = $_POST['cinemaLocation'];
 
     $sqlToBookMovie = 
     "INSERT INTO bookedMovieDetails (`movieTitle`,`dateBooked`,`price`,`purchaseId`,
-    `ticketNumber`,`seeingDay`,`timeOfDay`,`userEmail`) 
-    VALUES ('$movieTitle','$dateBooked','$moviePrice','$purchaseId','$ticketNumber','$seeingDay','$timeOfDay','$bookerEmail')";
+    `ticketNumber`,`seeingDay`,`timeOfDay`,`cinemaLocation`,`userEmail`) 
+    VALUES ('$movieTitle','$dateBooked','$moviePrice','$purchaseId','$ticketNumber','$seeingDay','$timeOfDay','$cinemaLocation','$bookerEmail')";
 
     $BookMovieResult = $conn->query($sqlToBookMovie);
 
