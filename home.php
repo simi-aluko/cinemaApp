@@ -226,7 +226,6 @@
                 </div>
               </div>
           </form>
-            
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" id="cancelBooking" data-dismiss="modal">Cancel Booking</button>
             </div>

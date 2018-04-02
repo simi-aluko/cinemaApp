@@ -183,7 +183,7 @@ session_start();
                         
                             $usercount = mysqli_num_rows($conn->query($sqlCheckIfUserExist));
                             
-                            if($usercount >= 1){
+                            if($usercount >= 1){ 
                               echo '<script type="text/javascript">alert("This user already exists")</script>';
                             }else{
                               $sqlRegisterUser = "INSERT INTO users (`fullname`,`phone`,`address`,`email`,`password`,`cardNo`,`cvv`,`pin`) VALUES ('$fullname','$telNo','$address','$email','$password','$cardNo','$cvv','$pin')";
@@ -208,16 +208,22 @@ session_start();
                         if(isset($_POST['signin'])){
                           $email = htmlspecialchars($_POST['email']);
                           $password = htmlspecialchars($_POST['password']);
-                      
-                          $sql = "SELECT `email`,`password` FROM users WHERE `email` = '$email' AND `password` = '$password'";
-                          $result = mysqli_num_rows($conn->query($sql));
-
-                          if($result > 0){
-                            $_SESSION['cinemaUser'] = $email;
-                              header('Location:home.php');
+                          
+                          if(!($email == "tdbAmin@tdbCinema.com" && $password == "tdbCinema.com" )){
+                            $sql = "SELECT `email`,`password` FROM users WHERE `email` = '$email' AND `password` = '$password'";
+                            $result = mysqli_num_rows($conn->query($sql));
+                            
+                            if($result > 0){
+                              $_SESSION['cinemaUser'] = $email;
+                                header('Location:home.php');
+                            }else{
+                                echo '<script type="text/javascript">alert("Check your Login details, login unsuccessful.")</script>';        
+                            }
                           }else{
-                              echo '<script type="text/javascript">alert("Check your Login details, login unsuccessful.")</script>';        
+                            $_SESSION['userAdmin'] = $email;
+                            header('location:admin/index.php');
                           }
+                       
                       }
                       ?>
      
